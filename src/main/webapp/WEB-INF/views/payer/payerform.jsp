@@ -23,8 +23,8 @@
 		            <div class="panel panel-default">
 		                <div class="panel-heading">Payer Registration</div>
 		                <div class="panel-body">
-		                	<c:url var="loginUrl" value="/payer/save" />
-	                        <form action="${loginUrl}" method="post" class="form-horizontal">
+		                	<c:url var="postUrl" value="/payer/form" />
+	                        <form action="${postUrl}" method="post" class="form-horizontal">
 	                            <c:if test="${param.error != null}">
 	                                <div class="alert alert-danger">
 	                                    <p>Invalid username and password.</p>

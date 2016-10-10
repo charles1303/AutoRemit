@@ -5,10 +5,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Login page</title>
-        <link href="<c:url value='/static/css/bootstrap/bootstrap.css' />"  rel="stylesheet"></link>
-        <link href="<c:url value='/static/font-awesome/4.6.3/css/font-awesome.css' />"  rel="stylesheet"></link>
-        <%--link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link> --%>
-        <%--link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" /--%>
+        <link href="<c:url value='/static/css/bootstrap.min.css' />"  rel="stylesheet"></link>
+        <link href="<c:url value='/static/css/font-awesome.min.css' />"  rel="stylesheet"></link>
+        
     </head>
  
     <body>
@@ -22,7 +21,6 @@
                         <c:url var="loginUrl" value="/login" />
                         <form action="${loginUrl}" method="post" class="form-horizontal">
                             <c:if test="${param.error != null}">
-                            <c:out value="${param.error}"/>
                                 <div class="alert alert-danger">
                                     <p>Invalid username and password.</p>
                                 </div>

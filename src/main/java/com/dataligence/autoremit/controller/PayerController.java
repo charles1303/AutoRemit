@@ -5,12 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RestController;
 
 import com.dataligence.autoremit.model.Payer;
 import com.dataligence.autoremit.service.PayerService;
 
-//@RestController
 @Controller
 @RequestMapping(value = "payer")
 public class PayerController extends BaseController<Payer> {
@@ -28,6 +26,12 @@ public class PayerController extends BaseController<Payer> {
     public String tableList(ModelMap model) {
         model.addAttribute("greeting", "Payer List");
         return "payer/payerlist";
+    }
+	
+	@RequestMapping(value = "/form", method = RequestMethod.POST)
+    public String addPayer(ModelMap model) {
+        model.addAttribute("greeting", "Payer Form");
+        return "payer/payerform";
     }
 
 }
