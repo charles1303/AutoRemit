@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="<c:url value='/static/js/jquery.js' />"></script>
 		<script type="text/javascript" src="<c:url value='/static/js/bootstrap.min.js' />"></script>
         <script type="text/javascript" src="<c:url value='/static/js/bootstrap-datetimepicker.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/static/js/payer.js' />"></script>
         
     </head>
  
@@ -56,9 +57,10 @@
 	                                <label class="input-group-addon" for="state"><i class="fa fa-user"></i></label>
 	                                <select class="form-control" id="state" name="state" required>
 	                                	<option selected="selected">Select State</option>
-	                                	<option value="LA">Lagos</option>
-	                                	<option value="OG">Ogun</option>
-	                                
+	                                	<c:forEach var="state" items="${states}">
+	                                		<option value="${state.id}">${state.name}</option>
+	                                	</c:forEach>
+	                                	
 	                                </select>
 	                                
 	                            </div>
@@ -78,26 +80,27 @@
 	                            </div>
 	                            <div class="col-md-6 input-group input-sm">
 	                            	<label class="radio-inline">Payer Type : </label>
-	                            	<label class="radio-inline"><input type="radio"  id="payerType1" name="payerType">Individual</label>
-									<label class="radio-inline"><input type="radio"  id="payerType2" name="payerType">Corporate</label>
+	                            	<label class="radio-inline"><input type="radio"  id="payerType1" name="payerType" value="I">Individual</label>
+									<label class="radio-inline"><input type="radio"  id="payerType2" name="payerType" value="C">Corporate</label>
 	                            	
 	                            </div>
-	                            <div id="ind_payer">
+	                            <div id="ind_payer" style="display: none;">
 	                            	<div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="firstname"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter Firstname" required>
+		                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter Firstname">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="middlename"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Enter Middlename" required>
+		                                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Enter Middlename">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="lastname"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Lastname" required>
+		                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Lastname">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                            	<div class="input-group date" id="example">
-										  <input type="text" class="form-control" />
+		                            		<label class="input-group-addon" for="dateOfBirth"><i class="fa fa-user"></i></label>
+										  <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth"/>
 										  <span class="input-group-addon">
 										    <span class="glyphicon glyphicon-calendar"></span>
 										  </span>
@@ -106,18 +109,18 @@
 		                            
 	                            </div>
 	                            
-	                            <div id="ind_corp">
+	                            <div id="ind_corp" style="display: none;">
 	                            	<div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="name"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+		                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="yearOfIncorporation"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="yearOfIncorporation" name="yearOfIncorporation" placeholder="Enter Year of Incorporation" required>
+		                                <input type="text" class="form-control" id="yearOfIncorporation" name="yearOfIncorporation" placeholder="Enter Year of Incorporation">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="regNum"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="regNum" name="regNum" placeholder="Enter Registration Number" required>
+		                                <input type="text" class="form-control" id="regNum" name="regNum" placeholder="Enter Registration Number">
 		                            </div>
 		                            
 	                            </div>

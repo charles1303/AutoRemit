@@ -34,7 +34,7 @@ public class User extends BaseModel{
     private String state=State.ACTIVE.getState();
     
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="DATEREGISTERED")
+    @Column(name="DATEREGISTERED", nullable=false)
     private Date dateRegistered;
     
     @Temporal(TemporalType.TIMESTAMP)

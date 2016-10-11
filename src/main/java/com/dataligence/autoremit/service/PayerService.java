@@ -47,5 +47,10 @@ public class PayerService {
 	public void delete(Long id) {
 		payerRepository.delete(id);
 	}
+	
+	@Transactional
+	public void createPayer(Payer payer) throws Exception{
+		payerRepository.saveAndFlush(payer);
+	}
 
 }
