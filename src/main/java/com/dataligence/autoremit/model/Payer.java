@@ -11,14 +11,19 @@ public class Payer extends User{
 	@Column(name="ADDRESS", nullable=false)
 	private String address;
 	
-	@Column(name="LGA_ID", nullable=false)
+	//@Column(name="LGA_ID", nullable=false)
+	@Column(name="LGA_ID")
 	private Long lga_id;
 	
-	@Column(name="STATE_ID", nullable=false)
+	//@Column(name="STATE_ID", nullable=false)
+	@Column(name="STATE_ID")
 	private Long state_id;
 	
 	@Column(name="PHONE", nullable=false)
 	private String phone;
+	
+	@Column(unique=true, nullable=false)
+	private String pin;
 
 	public String getAddress() {
 		return address;
@@ -50,6 +55,14 @@ public class Payer extends User{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
 	}
 
 }

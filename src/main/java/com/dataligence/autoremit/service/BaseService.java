@@ -16,24 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dataligence.autoremit.model.BaseModel;
 import com.dataligence.autoremit.model.User;
 
+
 //@Service
 //@Repository
 public class BaseService {
 	
-	//@Autowired
-	protected JpaRepository<BaseModel, Long> jpaRepository;
-	
-	//@Transactional(readOnly=true)
-	 public List<?> getAll() {
-		return jpaRepository.findAll();
 		
-	}
-	
-	//@Transactional
-	public void delete(Long id) {
-		jpaRepository.delete(id);
-	}
-	
 	public Authentication getCurrentUser(){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {

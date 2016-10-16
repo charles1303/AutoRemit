@@ -31,6 +31,12 @@ public class PayerService {
 		
 	}
 	
+	@Transactional
+	 public Payer findPayer(Long id) {
+		return payerRepository.findOne(id);
+		
+	}
+	
 	@Transactional(readOnly=true)
 	 public List<Individual> getAllIndividuals() {
 		return individualRepository.findAll();
@@ -51,6 +57,28 @@ public class PayerService {
 	@Transactional
 	public void createPayer(Payer payer) throws Exception{
 		payerRepository.saveAndFlush(payer);
+	}
+	
+	public String generatePIN(Payer payer){
+		//generate a 4 digit integer 1000 <10000
+		int randomPIN = (int)(Math.random()*9000)+1000;
+		return "AR"+payer.getUsername()+"0000"+(this.getAll().size()+1)+String.valueOf(randomPIN);
+	}
+	
+	public List<Payer> findByPinContaining(String searchString){
+		return payerRepository.findByPinContaining(searchString);
+	}
+	
+	public static void main(String args[]){
+		System.out.println(System.currentTimeMillis());
+		//generate a 4 digit integer 1000 <10000
+        int randomPIN = (int)(Math.random()*9000)+1000;
+        int randomPIN2 = (int)(Math.random()*9000)+1000;
+
+        //Store integer in a string
+        System.out.println(String.valueOf(randomPIN));
+        System.out.println(String.valueOf(randomPIN));
+        System.out.println(String.valueOf(randomPIN2));
 	}
 
 }

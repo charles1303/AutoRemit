@@ -13,8 +13,7 @@
 		<script type="text/javascript" src="<c:url value='/static/js/jquery.js' />"></script>
 		<script type="text/javascript" src="<c:url value='/static/js/bootstrap.min.js' />"></script>
         <script type="text/javascript" src="<c:url value='/static/js/bootstrap-datetimepicker.min.js' />"></script>
-        <script type="text/javascript" src="<c:url value='/static/js/payer.js' />"></script>
-        
+                
     </head>
  
     <body>
@@ -22,10 +21,12 @@
 		    <div class="row">
 		        <div class="col-md-8 col-md-offset-2">
 		            <div class="panel panel-default">
-		                <div class="panel-heading">Payer Registration</div>
+		                <div class="panel-heading">Payer Update</div>
 		                <div class="panel-body">
 		                	<c:url var="postUrl" value="/payer/form" />
 	                        <form action="${postUrl}" method="post" class="form-horizontal">
+	                        <input type="hidden" class="form-control" id="payerId" name="payerId" value="${payer.id}">
+	                        <input type="hidden" class="form-control" id="payerType" name="payerType" value="${payerType}">
 	                            <c:if test="${param.error != null}">
 	                                <div class="alert alert-danger">
 	                                    <p>Invalid username and password.</p>
@@ -38,19 +39,18 @@
 	                            </c:if>
 	                            <div class="col-md-6 input-group input-sm">
 	                                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-	                                <input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
+	                                <input type="text" class="form-control" id="username" name="ssoId" value="${payer.username}" required>
 	                            </div>
-	                            <div class="col-md-6 input-group input-sm">
-	                                <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
-	                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-	                            </div>
+	                            
 	                            <div class="col-md-6 input-group input-sm">
 	                                <label class="input-group-addon" for="email"><i class="fa fa-user"></i></label>
-	                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+	                                <input type="text" class="form-control" id="email" name="email" value="${payer.email}" required>
 	                            </div>
 	                            <div class="col-md-6 input-group input-sm">
 	                                <label class="input-group-addon" for="address"><i class="fa fa-user"></i></label>
-	                                <textarea rows="" cols="" class="form-control" id="address" name="address" placeholder="Enter Address" required></textarea>
+	                                <textarea rows="" cols="" class="form-control" id="address" name="address" required>
+	                                ${payer.address}
+	                                </textarea>
 	                               
 	                            </div>
 	                            <div class="col-md-6 input-group input-sm">
@@ -58,7 +58,8 @@
 	                                <select class="form-control" id="state" name="state" required>
 	                                	<option selected="selected">Select State</option>
 	                                	<c:forEach var="state" items="${states}">
-	                                		<option value="${state.id}">${state.name}</option>
+	                                		<option <c:if test="${person.state.id.key eq state.id}">selected="selected"</c:if>    value="${state.id}">${state.name} </option>
+	                                		
 	                                	</c:forEach>
 	                                	
 	                                </select>
@@ -76,31 +77,27 @@
 	                            </div>
 	                            <div class="col-md-6 input-group input-sm">
 	                                <label class="input-group-addon" for="phone"><i class="fa fa-user"></i></label>
-	                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone" required>
+	                                <input type="text" class="form-control" id="phone" name="phone" value="${payer.phone}" required>
 	                            </div>
-	                            <div class="col-md-6 input-group input-sm">
-	                            	<label class="radio-inline">Payer Type : </label>
-	                            	<label class="radio-inline"><input type="radio"  id="payerType1" name="payerType" value="I">Individual</label>
-									<label class="radio-inline"><input type="radio"  id="payerType2" name="payerType" value="C">Corporate</label>
-	                            	
-	                            </div>
-	                            <div id="ind_payer" style="display: none;">
+	                            
+	                            <c:if test="${payerType eq 'I'}">
+	                            <div id="ind_payer">
 	                            	<div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="firstname"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter Firstname">
+		                                <input type="text" class="form-control" id="firstname" name="firstname" value="${payer.firstname}" placeholder="Enter Firstname">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="middlename"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Enter Middlename">
+		                                <input type="text" class="form-control" id="middlename" name="middlename" value="${payer.middlename}" placeholder="Enter Middlename">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="lastname"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Lastname">
+		                                <input type="text" class="form-control" id="lastname" name="lastname" value="${payer.lastname}" placeholder="Enter Lastname">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                            	<div class="input-group date" id="example">
 		                            		<label class="input-group-addon" for="dateOfBirth"><i class="fa fa-user"></i></label>
-										  <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth"/>
+										  <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" value="${payer.dateOfBirth}"/>
 										  <span class="input-group-addon">
 										    <span class="glyphicon glyphicon-calendar"></span>
 										  </span>
@@ -108,34 +105,32 @@
 		                            </div>
 		                            
 	                            </div>
-	                            
-	                            <div id="ind_corp" style="display: none;">
+	                            </c:if>
+	                            <c:if test="${payerType eq 'C'}">
+	                            <div id="ind_corp">
 	                            	<div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="name"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+		                                <input type="text" class="form-control" id="name" name="name" value="${payer.name}" placeholder="Enter Name">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="yearOfIncorporation"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="yearOfIncorporation" name="yearOfIncorporation" placeholder="Enter Year of Incorporation">
+		                                <input type="text" class="form-control" id="yearOfIncorporation" name="yearOfIncorporation" value="${payer.yearOfIncorporation}" placeholder="Enter Year of Incorporation">
 		                            </div>
 		                            <div class="col-md-6 input-group input-sm">
 		                                <label class="input-group-addon" for="regNum"><i class="fa fa-user"></i></label>
-		                                <input type="text" class="form-control" id="regNum" name="regNum" placeholder="Enter Registration Number">
+		                                <input type="text" class="form-control" id="regNum" name="regNum" value="${payer.regNum}" placeholder="Enter Registration Number">
 		                            </div>
 		                            
 	                            </div>
+	                            </c:if>
 	                            
 	                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 	                                 
 	                            <div class="form-group">
 	
 									<div class="col-md-6 col-md-offset-4">
-		                                 <button type="submit" class="btn btn-primary">
-		                                    <i class="fa fa-btn fa-save"></i>Save
-		                                </button>
-		
-		                                <button type="reset" class="btn btn-primary"  id="btnReset">
-		                                    <i class="fa fa-btn fa-refresh"></i>Reset
+		                                <button type="submit" class="btn btn-primary">
+		                                    <i class="fa fa-btn fa-save"></i>Update
 		                                </button>
 					                 </div>
 					
@@ -154,6 +149,7 @@
 			$('#example').datetimepicker({
 				format: "YYYY-MM-DD"
 			});
+			
 		});
 	</script>
 </html>
