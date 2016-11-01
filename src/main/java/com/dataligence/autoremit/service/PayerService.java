@@ -25,6 +25,7 @@ public class PayerService {
 	@Autowired
 	private CorporateRepository corporateRepository;
 	
+	
 	@Transactional(readOnly=true)
 	 public List<Payer> getAll() {
 		return payerRepository.findAll();
@@ -68,6 +69,7 @@ public class PayerService {
 	public List<Payer> findByPinContaining(String searchString){
 		return payerRepository.findByPinContaining(searchString);
 	}
+	
 	
 	public static void main(String args[]){
 		System.out.println(System.currentTimeMillis());

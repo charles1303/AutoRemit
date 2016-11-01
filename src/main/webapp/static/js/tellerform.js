@@ -4,8 +4,8 @@
 var TellerForm = {
 		 Url: {
 		        baseUrl: '/autoremit',
-		        searchPayers: '/payer/searchPayers',
-		        searchAgency: '/agency/searchAgency',
+		        searchPayers: '/autocomp/searchPayers',
+		        searchAgency: '/autocomp/searchAgency',
 		        searchRevItems: '/agency/searchRevItems'
 
 		    },
@@ -44,7 +44,7 @@ $(document).ready(function () {
 	    
 	    $("#agency").autocomplete({
 	        source: function(request, response){
-	            $.get("/autoremit/payer/searchPayers", {
+	            $.get(TellerForm.Url.baseUrl+TellerForm.Url.searchAgency, {
 	                term:request.term
 	                }, function(data){
 	                response($.map(data, function(item) {

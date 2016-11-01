@@ -217,13 +217,5 @@ public class PayerController extends BaseController<Payer> {
 		return "payer/payerform";
 	}
 	
-	@RequestMapping(value = "/searchPayers", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Payer> searchPayers(@RequestParam(value ="term", required=true) String term) {
-		List<Payer> payers =  payerService.findByPinContaining(term);
-			return payers;
-
-	}
-
-
+	
 }
