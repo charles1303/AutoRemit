@@ -72,7 +72,7 @@ public class TransactionController extends BaseController{
 			e.printStackTrace();
 		}
 		
-		return "payer/payerDetail";
+		return "trxn/trxnList";
 	}
 
 }

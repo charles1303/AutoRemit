@@ -71,7 +71,7 @@ $(document).ready(function () {
 	    
 	    $("#revItem").autocomplete({
 	        source: function(request, response){
-	            $.get("/autoremit/payer/searchPayers", {
+	            $.get(TellerForm.Url.baseUrl+TellerForm.Url.searchRevItems, {
 	                term:request.term
 	                }, function(data){
 	                response($.map(data, function(item) {

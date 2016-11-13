@@ -1,62 +1,96 @@
 <%-- <%@ page isELIgnored="false"%> --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Login page</title>
-        <link href="<c:url value='/static/css/bootstrap.min.css' />"  rel="stylesheet"></link>
-        <link href="<c:url value='/static/css/font-awesome.min.css' />"  rel="stylesheet"></link>
-        
-    </head>
- 
-    <body>
-        <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
 
-                        <c:url var="loginUrl" value="/login" />
-                        <form action="${loginUrl}" method="post" class="form-horizontal">
-                            <c:if test="${param.error != null}">
-                                <div class="alert alert-danger">
-                                    <p>Invalid username and password.</p>
-                                </div>
-                            </c:if>
-                            <c:if test="${param.logout != null}">
-                                <div class="alert alert-success">
-                                    <p>You have been logged out successfully.</p>
-                                </div>
-                            </c:if>
-                            <div class="col-md-6 input-group input-sm">
-                                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-                                <input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required>
-                            </div>
-                            <div class="col-md-6 input-group input-sm">
-                                <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                            </div>
-                            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-                                 
-                            <div class="form-group">
+    <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
 
-				<div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
+    <!-- Bootstrap CSS -->    
+    <!--link href="css/bootstrap.min.css" rel="stylesheet"-->
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
+    <link href="<c:url value='/static/css/bootstrap.min.css' />"  rel="stylesheet"></link>
+    <!-- bootstrap theme -->
+    <!--link href="css/bootstrap-theme.css" rel="stylesheet"-->
 
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <link href="<c:url value='/static/css/bootstrap-theme.css' />"  rel="stylesheet"></link>
+    <!--external css-->
+    <!-- font icon -->
+    <!--link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" /-->
+
+    <link href="<c:url value='/static/css/elegant-icons-style.css' />"  rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/font-awesome.css' />"  rel="stylesheet"></link>
+    <!-- Custom styles -->
+    <!--link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" /-->
+
+    <link href="<c:url value='/static/css/style.css' />"  rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/style-responsive.css' />"  rel="stylesheet"></link>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+  <body class="login-img3-body">
+
+    <div class="container">
+
+	<c:url var="loginUrl" value="/login" />
+       <form action="${loginUrl}" method="post" class="login-form">
+	<c:if test="${param.error != null}">
+		<div class="alert alert-danger">
+		    <p>Invalid username and password.</p>
+		</div>
+	    </c:if>
+	    <c:if test="${param.logout != null}">
+		<div class="alert alert-success">
+		    <p>You have been logged out successfully.</p>
+		</div>
+	    </c:if>
+        <div class="login-wrap">
+            <p class="login-img"><i class="icon_lock_alt"></i></p>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon_profile"></i></span>
+              <input type="text" class="form-control" id="username" name="ssoId" placeholder="Enter Username" required autofocus>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+            </label>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+        </div>
+	<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+      </form>
+    <div class="text-right">
+            <div class="credits">
+                <!-- 
+                    All the links in the footer should remain intact. 
+                    You can delete the links only if you purchased the pro version.
+                    Licensing information: https://bootstrapmade.com/license/
+                    Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+                -->
+                <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
-</div>
- 
-    </body>
+    </div>
+
+
+  </body>
 </html>

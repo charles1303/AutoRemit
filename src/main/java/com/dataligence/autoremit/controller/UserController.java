@@ -26,6 +26,17 @@ public class UserController extends BaseController<User> {
         model.addAttribute("greeting", "Hi, Welcome to mysite");
         return "welcome";
     }
+    
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(ModelMap model) {
+        model.addAttribute("greeting", "Hi, Welcome to mysite");
+        model.addAttribute("user",getPrincipal());
+        model.addAttribute("newcount", "30");
+        model.addAttribute("paidrejectedcount", "5");
+        model.addAttribute("processingcount", "10");
+        model.addAttribute("authorizecount", "7");
+        return "index";
+    }
  
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
@@ -47,6 +58,7 @@ public class UserController extends BaseController<User> {
  
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String loginPage() {
+    	System.out.println("Loginnn==========");
         return "login";
     }
  
