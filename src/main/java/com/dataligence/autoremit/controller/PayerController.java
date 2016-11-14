@@ -133,6 +133,7 @@ public class PayerController extends BaseController<Payer> {
 		payer.setDateRegistered(new Date());
 
 		try {
+			payer.setPin(payerService.generatePIN(payer));
 			payerService.createPayer(payer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -156,6 +157,7 @@ public class PayerController extends BaseController<Payer> {
 		payer.setDateRegistered(new Date());
 
 		try {
+			payer.setPin(payerService.generatePIN(payer));
 			payerService.createPayer(payer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
