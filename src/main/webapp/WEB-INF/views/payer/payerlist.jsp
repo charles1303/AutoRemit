@@ -1,4 +1,4 @@
-	<%-- <%@ page isELIgnored="false"%> --%>
+<%-- <%@ page isELIgnored="false"%> --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -10,8 +10,7 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link href="<c:url value='/static/img/favicon.png' />"  rel="shortcut icon"></link>
-
+    
     <title>Creative - Bootstrap Admin Template</title>
 
     <!-- Bootstrap CSS -->    
@@ -40,11 +39,12 @@
     <link href="<c:url value='/static/css/xcharts.min.css' />"  rel="stylesheet"></link>
     <link href="<c:url value='/static/css/jquery-ui-1.10.4.min.css' />"  rel="stylesheet"></link>
 
-
-	
-	
-    
+	<link href="<c:url value='/static/css/bootstrap-datetimepicker.min.css' />"  rel="stylesheet"></link>
+	<link href="<c:url value='/static/css/datatables/jquery.dataTables.min.css' />"  rel="stylesheet"></link>
+        
   </head>
+
+
 
   <body>
   <!-- container section start -->
@@ -219,7 +219,7 @@
   </section>
   <!-- container section start -->
 
-    <!-- javascripts -->
+   <!-- javascripts -->
    
     	<script type="text/javascript" src="<c:url value='/static/js/jquery.js' />"></script>
 	<script type="text/javascript" src="<c:url value='/static/js/jquery-ui-1.10.4.min.js' />"></script>
@@ -263,10 +263,9 @@
     	<script type="text/javascript" src="<c:url value='/static/js/jquery.slimscroll.min.js' />"></script>
 
 	<script type="text/javascript" src="<c:url value='/static/js/moment.js' />"></script>
-	
-        <script type="text/javascript" src="<c:url value='/static/js/payer.js' />"></script>
-<script type="text/javascript" src="<c:url value='/static/js/datatables/jquery.dataTables.min.js' />"></script>
-    
+		<script type="text/javascript" src="<c:url value='/static/js/bootstrap.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/static/js/bootstrap-datetimepicker.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/static/js/datatables/jquery.dataTables.min.js' />"></script>
 
   <script>
 
@@ -342,4 +341,3 @@ $(document).ready(function(){
 	});
 });
 </script>
-
