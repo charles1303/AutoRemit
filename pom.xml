@@ -22,6 +22,7 @@
         <spring-data-jpa.version>1.7.2.RELEASE</spring-data-jpa.version>
         <jackson-databind.version>2.6.3</jackson-databind.version>
         <pdfbox.version>2.0.3</pdfbox.version>
+        <postgresqljdbc.version>9.4-1201-jdbc4</postgresqljdbc.version>
     </properties>
  
     <dependencies>
@@ -127,6 +128,14 @@
     		<artifactId>commons-codec</artifactId>
     		<version>${commons-codec.version}</version>
 		</dependency>
+		
+		<!-- PostGre SQL -->
+		<dependency>
+		  <groupId>org.postgresql</groupId>
+		  <artifactId>postgresql</artifactId>
+		  <version>${postgresqljdbc.version}</version>
+		</dependency>
+		
         
     </dependencies>
  
