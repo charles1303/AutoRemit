@@ -23,8 +23,9 @@ import com.dataligence.autoremit.utils.PdfBoxUtils;
 @Service
 public class TransactionService {
 	
-	String originalPdf = "/home/charles/Downloads/Docs/myprojects/Revenue_Autoremit/receipt_word3pdf.pdf";
-	String targetPdf = "/home/charles/Downloads/Docs/myprojects/Revenue_Autoremit/receipt_word3pdfCopied.pdf";
+	public final static String originalPdf = "receipt_word3pdf.pdf";
+	
+		
 	
 	@Autowired
 	private TransactionRepository transactionRepository;
@@ -68,7 +69,12 @@ public class TransactionService {
 	@Transactional
 	 public byte[] printTransaction(Long id) throws Exception {
 		Transaction trxn =  transactionRepository.findOne(id);
-		String filePath =  PdfBoxUtils.generateReceiptFromTransaction(originalPdf, targetPdf, trxn);
+		String generatedPdf = "receipt"+trxn.getTransactionRef()+".pdf";
+		
+		ClassLoader classLoader = this.getClass().getClassLoader();
+        File fileSource = new File(classLoader.getResource(originalPdf).getFile());
+        
+		String filePath =  PdfBoxUtils.generateReceiptFromTransaction(fileSource.getAbsolutePath(), generatedPdf, trxn);
 		
 		File file = new File(filePath);
 		FileInputStream fin = null;

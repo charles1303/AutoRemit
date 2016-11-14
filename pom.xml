@@ -21,6 +21,7 @@
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <spring-data-jpa.version>1.7.2.RELEASE</spring-data-jpa.version>
         <jackson-databind.version>2.6.3</jackson-databind.version>
+        <pdfbox.version>2.0.3</pdfbox.version>
     </properties>
  
     <dependencies>
@@ -88,6 +89,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector.version}</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>${pdfbox.version}</version>
+		</dependency>
+        
  
  		<!-- Servlet -->
         <dependency>
@@ -141,12 +150,35 @@
                         <warSourceDirectory>src/main/webapp</warSourceDirectory>
                         <warName>autoremit</warName>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
-                        <outputDirectory>${TOMCAT_HOME}/webapps</outputDirectory>
+                        <!-- outputDirectory>/home/charles/Servers/Tomcat/v8_0_15/apache-tomcat-8.0.15/webapps</outputDirectory-->
                     </configuration>
                 </plugin>
-                
+                                
             </plugins>
         </pluginManagement>
+        <plugins>
+        	   <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-dependency-plugin</artifactId>
+		            <version>2.3</version>
+		            <executions>
+		                <execution>
+		                    <phase>package</phase>
+		                    <goals><goal>copy</goal></goals>
+		                    <configuration>
+		                        <artifactItems>
+		                            <artifactItem>
+		                                <groupId>com.github.jsimone</groupId>
+		                                <artifactId>webapp-runner</artifactId>
+		                                <version>8.0.30.2</version>
+		                                <destFileName>webapp-runner.jar</destFileName>
+		                            </artifactItem>
+		                        </artifactItems>
+		                    </configuration>
+		                </execution>
+		            </executions>
+		        </plugin>
+        </plugins>
         <finalName>AutoRemit</finalName>
     </build>
   
