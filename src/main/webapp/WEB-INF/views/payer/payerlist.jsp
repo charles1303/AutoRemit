@@ -330,7 +330,7 @@ $(document).ready(function(){
 		{ "mData": "phone"},
 		{ "mData": "id",
 			"render": function (data, type, row, meta) {
-			return '<a href="/autoremit/payer/view?id=' + data + '">View</a>';
+			return '<a href="/payer/view?id=' + data + '">View</a>';
 		    }
 		},
 		

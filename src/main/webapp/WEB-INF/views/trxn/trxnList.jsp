@@ -328,7 +328,7 @@ $(document).ready(function(){
 		{ "mData": "payer.username"},
 		{ "mData": "id",
 			"render": function (data, type, row, meta) {
-				return '<a href="/autoremit/trxn/view?id=' + data + '">Approve and Download</a>';
+				return '<a href="/trxn/view?id=' + data + '">Approve and Download</a>';
 		    }
 		},
 		
