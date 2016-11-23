@@ -11,6 +11,7 @@ public class Agency extends BaseModel {
 	@Column(name="NAME",unique=true, nullable=false)
 	private String name;
 	
+	// This uniquely identifies the code for each agency
 	@Column(name="CODE",unique=true, nullable=false)
 	private String code;
 
