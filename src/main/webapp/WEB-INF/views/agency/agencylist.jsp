@@ -1,5 +1,4 @@
 <%@include file="..\header.jsp" %>
-      <!--sidebar end-->
       
       <!--main content start-->
       <section id="main-content">
@@ -7,48 +6,75 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+					<h3 class="page-header"><i class="fa fa-laptop"></i> Agency Details</h3>
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="../index">Home</a></li>
+						<li><i class="fa fa-home"></i><a href="${pageContext.request.contextPath}/index">Home</a></li>
 						<li><i class="fa fa-laptop"></i>Dashboard</li>						  	
 					</ol>
 				</div>
 			</div>
+			
+			
+			
+				<!-- Modal -->
+											<div class="modal fade" id="loanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											  <div class="modal-dialog" role="document">
+												<div class="modal-content">
+												  <div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">New Agency Enrollment</h4>
+												  </div>
+												  <div class="modal-body table-responsive">
+											<c:url var="postUrl" value="/agency/form" />		 
+		                	             <form:form action="${postUrl}" method="post" class="form-horizontal">
+	                          
+					<div class="row">
+	                            <div class="col-md-6 input-group input-sm">
+	                                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+	                                <form:input class="form-control" id="agencyname" placeholder="Enter agency name" path="name" required="true"/>
+	                                
+	                            </div>
+					</div>
+					<div class="row">
+	                            <div class="col-md-6 input-group input-sm">
+	                                <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
+	                                <form:input class="form-control" id="code" placeholder="Enter Code" path = "code" required="true"/>
+	                            </div>
+					</div>
+					  
+	                          
+	                                 
+	                            <div class="form-group">
+	
+									<div class="col-md-6 col-md-offset-4">
+		                                 <button type="submit" class="btn btn-primary">
+		                                    <i class="fa fa-btn fa-save"></i>Save
+		                                </button>
+		
+		                                <button type="reset" class="btn btn-primary"  id="btnReset">
+		                                    <i class="fa fa-btn fa-refresh"></i>Reset
+		                                </button>
+					                 </div>
+					
+					            </div>
+	                        </form:form>
+		                
+		                
+												  </div>
+												  <div class="modal-footer">
+													<button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+													
+													
+												  </div>
+												</div>
+											  </div>
+											</div>	 
+			
+			
+			
+			
               
-            <div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box blue-bg">
-						<i class="fa fa-cloud-download"></i>
-						<div class="count">10,000,000.00</div>
-						<div class="title">Payments Made</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box brown-bg">
-						<i class="fa fa-shopping-cart"></i>
-						<div class="count">2</div>
-						<div class="title">Pending Requests</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->	
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-						<i class="fa fa-thumbs-o-up"></i>
-						<div class="count">4</div>
-						<div class="title">Approved Requests</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-						<i class="fa fa-cubes"></i>
-						<div class="count">120</div>
-						<div class="title">Users</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
-				
-			</div><!--/.row-->
+            
 		
 		<div class="row">
   		<div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
@@ -56,18 +82,30 @@
 		  	   <div class='col-md-12'>
                  <div class="clearfix"></div>
                  <br />
-                 <table id="payerList" class="table table-responsive table-bordered table-striped table-small-font table-hover nowrap">
+                 <table id="agencyList" class="table table-responsive table-bordered table-striped table-small-font table-hover nowrap">
                      <thead>
                      	<tr>
-                     	  <th nowrap>Pin</th>
-                          <th nowrap>Username</th>
-                          <th nowrap>Email</th>
-                          <th nowrap>Phone</th>
-			  <th nowrap>Actions</th>
+                     	  <th nowrap>Agency Name</th>
+                          <th nowrap>Agency Code</th>
+                          
+			          <th nowrap>Actions</th>
                          </tr>
                      </thead>
                      
                  </table>
+                   <div class="form-group">
+	
+									<div class="col-md-6 col-md-offset-4">
+		                                 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#loanModal">
+		                                    <i class="fa fa-pencil-square-o "></i>Create New Agency
+		                                </button>
+		
+		                                <button type="reset" class="btn btn-primary"  id="btnReset">
+		                                    <i class="fa fa-btn fa-refresh"></i>Reset
+		                                </button>
+					                 </div>
+					
+					            </div>
              </div>
 		  </div>
         </div>
@@ -191,17 +229,15 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var data =eval('${payerList}');
-	var table = $('#payerList').DataTable( {
+	var data =eval('${agencyList}');
+	var table = $('#agencyList').DataTable( {
 		"aaData": data,
 		"aoColumns": [
-		{ "mData": "pin"},
-		{ "mData": "username"},
-		{ "mData": "email"},
-		{ "mData": "phone"},
+		{ "mData": "name"},
+		{ "mData": "code"},
 		{ "mData": "id",
 			"render": function (data, type, row, meta) {
-			return '<a href="/payer/view?id=' + data + '">View</a>';
+			return '<a href="#">View</a>';
 		    }
 		},
 		

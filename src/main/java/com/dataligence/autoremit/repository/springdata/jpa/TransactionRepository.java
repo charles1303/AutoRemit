@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.dataligence.autoremit.model.Agency;
+import com.dataligence.autoremit.model.Payer;
 import com.dataligence.autoremit.model.Transaction;
 
 //@Qualifier("transactionRepositoryBean")

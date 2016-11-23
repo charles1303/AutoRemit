@@ -29,6 +29,7 @@ public class UserController extends BaseController<User> {
     
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(ModelMap model) {
+    	System.out.println("Index====");
         model.addAttribute("greeting", "Hi, Welcome to mysite");
         model.addAttribute("user",getPrincipal());
         model.addAttribute("newcount", "30");
