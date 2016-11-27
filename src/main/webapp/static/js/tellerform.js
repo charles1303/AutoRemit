@@ -3,10 +3,10 @@
  */
 var TellerForm = {
 		 Url: {
-		        baseUrl: '/autoremit',
+		        baseUrl: '',
 		        searchPayers: '/autocomp/searchPayers',
 		        searchAgency: '/autocomp/searchAgency',
-		        searchRevItems: '/agency/searchRevItems'
+		        searchRevItems: '/autocomp/searchRevItems'
 
 		    },
 		minLength: 2

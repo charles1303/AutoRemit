@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dataligence.autoremit.model.Agency;
 import com.dataligence.autoremit.model.Payer;
+import com.dataligence.autoremit.model.RevenueItem;
+import com.dataligence.autoremit.service.AgencyService;
 import com.dataligence.autoremit.service.PayerService;
+import com.dataligence.autoremit.service.RevenueItemService;
 
 @Controller
 @RequestMapping(value = "autocomp")
@@ -20,6 +23,12 @@ public class AutoCompleteController {
 	
 	@Autowired
 	private PayerService payerService;
+	
+	@Autowired
+	private AgencyService agencyService;
+	
+	@Autowired
+	private RevenueItemService revenueItemService;
 	
 	@RequestMapping(value = "/searchPayers", method = RequestMethod.GET)
 	@ResponseBody
@@ -32,9 +41,16 @@ public class AutoCompleteController {
 	@RequestMapping(value = "/searchAgency", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Agency> searchAgency(@RequestParam(value ="term", required=true) String term) {
-		//List<Agency> agencies =  payerService.findByAgencyName(term);
-		List<Agency> agencies =  new ArrayList<>();
+		List<Agency> agencies =  agencyService.findByNameContaining(term);
 			return agencies;
+
+	}
+	
+	@RequestMapping(value = "/searchRevItems", method = RequestMethod.GET)
+	@ResponseBody
+	public List<RevenueItem> searchRevenueItem(@RequestParam(value ="term", required=true) String term) {
+		List<RevenueItem> items =  revenueItemService.findByNameContaining(term);
+			return items;
 
 	}
 
