@@ -155,7 +155,7 @@ public class AgencyController extends BaseController<Agency> {
    agencystaff.setEmail(request.getParameter("email"));
    agencystaff.setUsername(request.getParameter("username"));
    agencystaff.setState(request.getParameter("state"));
-   agencystaff.setAgency(agencyService.findPayer(Long.valueOf(request.getParameter("agency"))));
+   agencystaff.setAgency(agencyService.findAgency(Long.valueOf(request.getParameter("agency"))));
 		try {
 			agencyService.createAgencyStaff(agencystaff);
 		} catch (Exception e) {

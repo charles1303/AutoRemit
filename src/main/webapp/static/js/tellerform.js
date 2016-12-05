@@ -3,10 +3,10 @@
  */
 var TellerForm = {
 		 Url: {
-		        baseUrl: '/autoremit',
+		        baseUrl: '',
 		        searchPayers: '/autocomp/searchPayers',
 		        searchAgency: '/autocomp/searchAgency',
-		        searchRevItems: '/agency/searchRevItems'
+		        searchRevItems: '/autocomp/searchRevItems'
 
 		    },
 		minLength: 2
@@ -49,7 +49,7 @@ $(document).ready(function () {
 	                }, function(data){
 	                response($.map(data, function(item) {
 	                    return {
-	                        label: item.pin,
+	                        label: item.name,
 	                        value: item.id
 	                    }
 	                }))
@@ -76,7 +76,7 @@ $(document).ready(function () {
 	                }, function(data){
 	                response($.map(data, function(item) {
 	                    return {
-	                        label: item.pin,
+	                        label: item.name,
 	                        value: item.id
 	                    }
 	                }))

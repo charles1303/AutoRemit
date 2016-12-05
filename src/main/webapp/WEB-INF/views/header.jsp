@@ -134,6 +134,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
+                      	  <li><a class="" href="${pageContext.request.contextPath}/trxn/list">Pending Transactions</a></li>
                           <li><a class="" href="${pageContext.request.contextPath}/agency/list">Agency Setup</a></li>
                           <li><a class="" href="${pageContext.request.contextPath}/agency/listagstaff">Agency Staff Setup</a></li>
                       </ul>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ import com.dataligence.autoremit.model.AgencyStaff;
 import com.dataligence.autoremit.model.Payer;
 import com.dataligence.autoremit.model.Transaction;
 import com.dataligence.autoremit.model.User;
+import com.dataligence.autoremit.repository.springdata.jpa.AgencyStaffRepository;
 import com.dataligence.autoremit.repository.springdata.jpa.BaseRepository;
 import com.dataligence.autoremit.repository.springdata.jpa.TransactionRepository;
 import com.dataligence.autoremit.repository.springdata.jpa.UserRepository;
 import com.dataligence.autoremit.utils.PdfBoxUtils;
 
 @Service
-public class TransactionService {
+public class TransactionService extends BaseService{
 	
 	public final static String originalPdf = "receipt_word3pdf.pdf";
 	
@@ -36,9 +38,13 @@ public class TransactionService {
 	@Autowired
 	private BaseRepository<?> baseRepository;
 	
+	private AgencyStaffRepository agencyStaffRepository;
+	
 	@Transactional
 	public void recordTransaction(Transaction transaction) throws Exception{
 		transaction.setTransactionRef(generateTransactionReference(transaction.getPayer()));
+		transaction.setPaymentDetails("Entry By User : "+this.getCurrentUserName());
+		transaction.setTrxnDate(new Date());
 		transactionRepository.saveAndFlush(transaction);
 	}
 	
@@ -61,28 +67,34 @@ public class TransactionService {
 		return transactionRepository.findAll();
 		
 	}
-	
-	public Object getObject(Long id){
-		return transactionRepository.findById(id);
-	}
-	
+		
 	@Transactional
 	 public byte[] printTransaction(Long id) throws Exception {
-		Transaction trxn =  transactionRepository.findOne(id);
-		String generatedPdf = "receipt"+trxn.getTransactionRef()+".pdf";
 		
-		ClassLoader classLoader = this.getClass().getClassLoader();
-        File fileSource = new File(classLoader.getResource(originalPdf).getFile());
-        
-		String filePath =  PdfBoxUtils.generateReceiptFromTransaction(fileSource.getAbsolutePath(), generatedPdf, trxn);
-		
-		File file = new File(filePath);
 		FileInputStream fin = null;
-		byte fileContent[] = new byte[(int)file.length()];
+		byte fileContent[] = null;
+		
 		try {
+			Transaction trxn =  transactionRepository.findOne(id);
+			User user = userRepository.findByUsername(this.getCurrentUserName());
+			AgencyStaff staff = (AgencyStaff)user;
+			
+			trxn.setAgencyStaff(staff);
+			String generatedPdf = "receipt"+trxn.getTransactionRef()+".pdf";
+			
+			ClassLoader classLoader = this.getClass().getClassLoader();
+	        File fileSource = new File(classLoader.getResource(originalPdf).getFile());
+	        
+			String filePath =  PdfBoxUtils.generateReceiptFromTransaction(fileSource.getAbsolutePath(), generatedPdf, trxn);
+			
+			File file = new File(filePath);
+			
+			fileContent = new byte[(int)file.length()];
+		
 			fin = new FileInputStream(file);
 			fin.read(fileContent);
-			String s = new String(fileContent);
+			transactionRepository.saveAndFlush(trxn);
+			
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("File not found" + e);

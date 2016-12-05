@@ -26,12 +26,6 @@ public class AgencyService {
 	@Autowired
 	private AgencyStaffRepository agencystaffRepository;
 	
-	@Autowired
-	private IndividualRepository individualRepository;
-	
-	@Autowired
-	private CorporateRepository corporateRepository;
-	
 	
 	@Transactional(readOnly=true)
 	 public List<Agency> getAll() {
@@ -45,7 +39,7 @@ public class AgencyService {
 	}
 	
 	@Transactional
-	 public Agency findPayer(Long id) {
+	 public Agency findAgency(Long id) {
 		return agencyRepository.findOne(id);
 		
 	}
@@ -54,18 +48,6 @@ public class AgencyService {
 	@Transactional
 	 public AgencyStaff findAgencyStaff(Long id) {
 		return agencystaffRepository.findOne(id);
-		
-	}
-	
-	@Transactional(readOnly=true)
-	 public List<Individual> getAllIndividuals() {
-		return individualRepository.findAll();
-		
-	}
-	
-	@Transactional(readOnly=true)
-	 public List<Corporate> getAllCorporates() {
-		return corporateRepository.findAll();
 		
 	}
 	
@@ -90,25 +72,8 @@ public class AgencyService {
 		agencystaffRepository.saveAndFlush(agencystaff);
 	}
 	
-	public String generatePIN(Payer payer){
-		//generate a 4 digit integer 1000 <10000
-		int randomPIN = (int)(Math.random()*9000)+1000;
-		return "AR"+payer.getUsername()+"0000"+(this.getAll().size()+1)+String.valueOf(randomPIN);
+	public List<Agency> findByNameContaining(String searchString){
+		return agencyRepository.findByNameContaining(searchString);
 	}
 	
-	 
-	
-	
-	public static void main(String args[]){
-		System.out.println(System.currentTimeMillis());
-		//generate a 4 digit integer 1000 <10000
-        int randomPIN = (int)(Math.random()*9000)+1000;
-        int randomPIN2 = (int)(Math.random()*9000)+1000;
-
-        //Store integer in a string
-        System.out.println(String.valueOf(randomPIN));
-        System.out.println(String.valueOf(randomPIN));
-        System.out.println(String.valueOf(randomPIN2));
-	}
-
 }

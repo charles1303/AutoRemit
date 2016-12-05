@@ -9,6 +9,6 @@ import com.dataligence.autoremit.model.Payer;
 
 public interface AgencyRepository extends JpaRepository<Agency, Long>{
 	
-	//List<Agency> findByPinContaining(String searchString);
+	List<Agency> findByNameContaining(String searchString);
 
 }
