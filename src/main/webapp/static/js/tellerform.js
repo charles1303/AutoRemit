@@ -49,7 +49,7 @@ $(document).ready(function () {
 	                }, function(data){
 	                response($.map(data, function(item) {
 	                    return {
-	                        label: item.pin,
+	                        label: item.name,
 	                        value: item.id
 	                    }
 	                }))
@@ -76,7 +76,7 @@ $(document).ready(function () {
 	                }, function(data){
 	                response($.map(data, function(item) {
 	                    return {
-	                        label: item.pin,
+	                        label: item.name,
 	                        value: item.id
 	                    }
 	                }))

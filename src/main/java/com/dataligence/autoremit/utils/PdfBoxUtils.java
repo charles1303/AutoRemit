@@ -2,6 +2,7 @@ package com.dataligence.autoremit.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import com.dataligence.autoremit.model.Transaction;
 public class PdfBoxUtils {
 	
 	private static PDDocument _pdfDocument;
+	
+	private static final String MONEY_PATTERN = "###,###.##";
 	
 	
 public static void main(String[] args) {
@@ -51,12 +54,15 @@ public static String generateReceiptFromTransaction(String originalPdf, String t
 	
 	setField("payerId", trxn.getPayer().getPin());
 	setField("address", trxn.getPayer().getAddress());
-	setField("amount", String.valueOf(trxn.getAmount()));
+	
+	DecimalFormat decimalFormat = new DecimalFormat(MONEY_PATTERN);
+	
+	setField("amount", decimalFormat.format(trxn.getAmount()));
 	setField("amtInWords", trxn.getAmtInWords());
-	setField("revenueCode", String.valueOf(trxn.getItem()));
+	setField("revenueCode", String.valueOf(trxn.getItem().getCode()+" : "+trxn.getItem().getName()));
 	setField("paymtDetails", trxn.getPaymentDetails());
 	setField("chairmanSign", trxn.getTransactionRef());
-	//setField("postedBy", trxn.getAgencyStaff().getUsername());
+	setField("postedBy", trxn.getAgencyStaff().getUsername());
 	_pdfDocument.save(targetPdf);
 	_pdfDocument.close();
 	return targetPdf;

@@ -39,7 +39,7 @@ public class AgencyService {
 	}
 	
 	@Transactional
-	 public Agency findPayer(Long id) {
+	 public Agency findAgency(Long id) {
 		return agencyRepository.findOne(id);
 		
 	}

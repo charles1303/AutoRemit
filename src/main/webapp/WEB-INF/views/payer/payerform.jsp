@@ -1,4 +1,8 @@
 <%@include file="..\header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
       <!--sidebar end-->
       
       <!--main content start-->
@@ -59,16 +63,11 @@
 		                <div class="panel-body">
 		                	<c:url var="postUrl" value="/payer/form" />
 	                        <form action="${postUrl}" method="post" class="form-horizontal">
-	                            <c:if test="${param.error != null}">
-	                                <div class="alert alert-danger">
-	                                    <p>Invalid username and password.</p>
-	                                </div>
-	                            </c:if>
-	                            <c:if test="${param.logout != null}">
-	                                <div class="alert alert-success">
-	                                    <p>You have been logged out successfully.</p>
-	                                </div>
-	                            </c:if>
+	                        
+	                        	<c:if test="${STATUS_MESSAGE != null}">
+								  <div id="status_message">${STATUS_MESSAGE}</div>
+								</c:if> 
+	                            
 					<div class="row">
 	                            <div class="col-md-6 input-group input-sm">
 	                                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
@@ -166,7 +165,7 @@
 		                            <div class="col-md-6 input-group input-sm">
 		                            	<div class="input-group date" id="example">
 		                            		<label class="input-group-addon" for="dateOfBirth"><i class="fa fa-user"></i></label>
-										  <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth"/>
+										  <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Date of Birth"/>
 										  <span class="input-group-addon">
 										    <span class="glyphicon glyphicon-calendar"></span>
 										  </span>

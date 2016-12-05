@@ -1,4 +1,6 @@
 <%@include file="..\header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
       <!--sidebar end-->
       
       <!--main content start-->
@@ -59,6 +61,10 @@
 		                <div class="panel-body">
 		                	<c:url var="postUrl" value="/bank/recordPayment" />
 	                        <form action="${postUrl}" method="post" class="form-horizontal">
+	                        	<c:if test="${STATUS_MESSAGE != null}">
+								  <div id="status_message">${STATUS_MESSAGE}</div>
+								</c:if> 
+								
 		                        <input type="hidden" class="form-control" id="payerId" name="payerId" value="">
 		                        <input type="hidden" class="form-control" id="agencyId" name="agencyId" value="">
 		                        <input type="hidden" class="form-control" id="revItemId" name="revItemId" value="">
@@ -95,14 +101,20 @@
 			                       
 			                    </div>
 					</div>
-					<div class="col-md-6 col-md-offset-2">
-		                                <button type="submit" class="btn btn-primary">
-		                                    <i class="fa fa-btn fa-save"></i>Save
-		                                </button>
-		
-		                                <button type="reset" class="btn btn-primary"  id="btnReset">
-		                                    <i class="fa fa-btn fa-refresh"></i>Reset
-		                                </button>
+					
+					
+					<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+					
+					<div class="form-group">
+						<div class="col-md-6 col-md-offset-2">
+			                                <button type="submit" class="btn btn-primary">
+			                                    <i class="fa fa-btn fa-save"></i>Save
+			                                </button>
+			
+			                                <button type="reset" class="btn btn-primary"  id="btnReset">
+			                                    <i class="fa fa-btn fa-refresh"></i>Reset
+			                                </button>
+					        </div>
 				        </div>
 					
 

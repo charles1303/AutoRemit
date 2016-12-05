@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dataligence.autoremit.model.Corporate;
 import com.dataligence.autoremit.model.Individual;
@@ -133,7 +134,7 @@ public class PayerController extends BaseController<Payer> {
 		payer.setDateRegistered(new Date());
 
 		try {
-			payer.setPin(payerService.generatePIN(payer));
+			payer.setPin(payerService.generatePIN());
 			payerService.createPayer(payer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -157,7 +158,7 @@ public class PayerController extends BaseController<Payer> {
 		payer.setDateRegistered(new Date());
 
 		try {
-			payer.setPin(payerService.generatePIN(payer));
+			payer.setPin(payerService.generatePIN());
 			payerService.createPayer(payer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -167,8 +168,9 @@ public class PayerController extends BaseController<Payer> {
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String addPayer(HttpServletRequest request, ModelMap model) {
-
+		String statusMsg = "Error creating payer. Please Contact Administrator";
 		Payer payer;
+		try {
 		if (request.getParameter("payerType").equalsIgnoreCase("I")) {
 			payer = new Individual();
 			((Individual) payer)
@@ -179,13 +181,8 @@ public class PayerController extends BaseController<Payer> {
 
 			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 			Date birthDate = null;
-			try {
-				birthDate = df.parse(request.getParameter("dateOfBirth"));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			birthDate = df.parse(request.getParameter("dateOfBirth"));
+			
 			((Individual) payer).setDateOfBirth(birthDate);
 		} else {
 			payer = new Corporate();
@@ -195,7 +192,7 @@ public class PayerController extends BaseController<Payer> {
 			((Corporate) payer).setRegNum(request.getParameter("regNum"));
 		}
 		String payerId = request.getParameter("payerId");
-		if (!payerId.equalsIgnoreCase("") && !(payerId == null)) {
+		if (!(payerId == null) && !payerId.equalsIgnoreCase("")) {
 			payer.setId(Long.valueOf(payerId));
 		}
 		
@@ -203,19 +200,18 @@ public class PayerController extends BaseController<Payer> {
 		payer.setPassword(request.getParameter("password"));
 		payer.setEmail(request.getParameter("email"));
 		payer.setAddress(request.getParameter("address"));
-		payer.setState_id(Long.getLong(request.getParameter("state")));
-		payer.setLga_id(Long.getLong(request.getParameter("lga")));
+		//payer.setState_id(Long.getLong(request.getParameter("state")));
+		//payer.setLga_id(Long.getLong(request.getParameter("lga")));
 		payer.setPhone(request.getParameter("phone"));
 		payer.setDateRegistered(new Date());
-		payer.setPin(payerService.generatePIN(payer));
-
-		try {
-			payerService.createPayer(payer);
+		payer.setPin(payerService.generatePIN());
+		payerService.createPayer(payer);
+		statusMsg = "Successfully created payer";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		model.addAttribute("STATUS_MESSAGE", statusMsg);
 		return "payer/payerform";
 	}
 	

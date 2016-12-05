@@ -60,10 +60,10 @@ public class PayerService {
 		payerRepository.saveAndFlush(payer);
 	}
 	
-	public String generatePIN(Payer payer){
+	public String generatePIN(){
 		//generate a 4 digit integer 1000 <10000
 		int randomPIN = (int)(Math.random()*9000)+1000;
-		return "AR"+payer.getUsername()+"0000"+(this.getAll().size()+1)+String.valueOf(randomPIN);
+		return "AR"+"0000"+(this.getAll().size()+1)+String.valueOf(randomPIN);
 	}
 	
 	public List<Payer> findByPinContaining(String searchString){
