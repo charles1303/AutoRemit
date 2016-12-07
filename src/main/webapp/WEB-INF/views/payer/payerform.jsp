@@ -340,7 +340,7 @@
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('#example').datetimepicker({
-				format: "YYYY-MM-DD"
+				//format: "YYYY-MM-DD"
 			});
 		});
 	</script>
